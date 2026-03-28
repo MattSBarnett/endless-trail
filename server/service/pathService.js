@@ -3,7 +3,7 @@ const geocodeLocation = async(name) => {
     { headers: { 'User-Agent': 'endless-trail' } }
   )
 
-  resultArray = await result.json()
+  const resultArray = await result.json()
   
   if (!resultArray || resultArray.length === 0) {
     throw new Error(`Location not found: "${name}"`)
@@ -24,4 +24,4 @@ const planRoute = async(startText, endText) => {
     return path
 }
 
-module.exports = { planRoute }
+export default { planRoute }

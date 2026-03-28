@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { planRoute } = require('../service/pathService')
+const { planRoute } = require('../service/pathService').default
 
 router.get('/search', async (req, res) => {
   try {
