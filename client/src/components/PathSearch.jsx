@@ -15,28 +15,43 @@ function PathSearch({ onResult }) {
     }
   };
   return (
-    <div>
-      <h1>The Endless Trail</h1>
-      <label>Start:</label>
-      <input
-        type="text"
-        id="start"
-        name="start"
-        value={start}
-        onChange={(e) => setStart(e.target.value)}
-      />
-      <label>End:</label>
-      <input
-        type="text"
-        id="end"
-        name="end"
-        value={end}
-        onChange={(e) => setEnd(e.target.value)}
-      />
-      <button onClick={findRoute} disabled={!start.trim() || !end.trim()}>
-        Find Route
-      </button>
-      {error && <p>{error}</p>}
+    <div className="bg-white rounded-xl p-6 flex flex-col gap-4">
+      <h1 className="text-green-900 font-bold text-3xl text-center">
+        The Endless Trail
+      </h1>
+
+      <div className="flex gap-4">
+        <div className="flex flex-col gap-1 flex-1">
+          <label className="text-green-900 font-semibold text-sm">Start</label>
+          <input
+            type="text"
+            value={start}
+            onChange={(e) => setStart(e.target.value)}
+            className="border border-green-200 rounded-lg px-4 py-2 bg-green-50 text-green-900"
+          />
+        </div>
+        <div className="flex flex-col gap-1 flex-1">
+          <label className="text-green-900 font-semibold text-sm">End</label>
+          <input
+            type="text"
+            value={end}
+            onChange={(e) => setEnd(e.target.value)}
+            className="border border-green-200 rounded-lg px-4 py-2 bg-green-50 text-green-900"
+          />
+        </div>
+      </div>
+
+      <div className="flex justify-center">
+        <button
+          onClick={findRoute}
+          disabled={!start.trim() || !end.trim()}
+          className="bg-green-600 disabled:bg-green-300 text-white px-8 py-2 rounded-lg"
+        >
+          Find Route
+        </button>
+      </div>
+
+      {error && <p className="text-red-500 text-center">{error}</p>}
     </div>
   );
 }

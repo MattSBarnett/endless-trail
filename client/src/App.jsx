@@ -1,13 +1,15 @@
 import { useState } from "react";
-import PathSearch from "./components/pathSearch";
-import MapViewer from "./components/mapViewer";
+import PathSearch from "./components/PathSearch";
+import MapViewer from "./components/MapViewer";
 
 function App() {
   const [path, setPath] = useState(null);
   return (
-    <div>
-      <PathSearch onResult={setPath} />
-      {path && <MapViewer path={path} />}
+    <div className="min-h-screen bg-green-50 p-6">
+      <div>
+        <PathSearch onResult={setPath} />
+        {path && <MapViewer path={path} />}
+      </div>
     </div>
   );
 }
