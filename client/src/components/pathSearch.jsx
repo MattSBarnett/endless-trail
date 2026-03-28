@@ -4,10 +4,15 @@ import { getPath } from "../service/pathService";
 function PathSearch({ onResult }) {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
+  const [error, setError] = useState(null);
 
   const findRoute = async () => {
-    const path = await getPath(start, end);
-    onResult(path);
+    try {
+      const path = await getPath(start, end);
+      onResult(path);
+    } catch (errorRespnse) {
+      setError(errorRespnse.message);
+    }
   };
   return (
     <div>
@@ -28,7 +33,10 @@ function PathSearch({ onResult }) {
         value={end}
         onChange={(e) => setEnd(e.target.value)}
       />
-      <button onClick={findRoute}>Find Route</button>
+      <button onClick={findRoute} disabled={!start.trim() || !end.trim()}>
+        Find Route
+      </button>
+      {error && <p>{error}</p>}
     </div>
   );
 }

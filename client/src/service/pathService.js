@@ -1,11 +1,14 @@
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const getPath = async (start, end) => {
-  const res = await fetch(
+  const result = await fetch(
     `${SERVER_URL}/api/path/search?start=${start}&end=${end}`,
   );
-  if (!res.ok) {
-    throw new Error("Failed to fetch route");
+
+  if (!result.ok) {
+    const data = await result.json();
+    throw new Error(data.error);
   }
-  return res.json();
+
+  return result.json();
 };
