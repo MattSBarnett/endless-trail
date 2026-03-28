@@ -1,5 +1,5 @@
-function mapViewer({ path }) {
+function MapViewer({ path }) {
   return <p>{JSON.stringify(path, null, 2)}</p>;
 }
 
-export default mapViewer;
+export default MapViewer;
