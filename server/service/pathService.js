@@ -16,9 +16,18 @@ const getPathBetweenCoordinates = async (startCoord, endCoord) => {
   const result = await fetch(
     `https://api.openrouteservice.org/v2/directions/foot-hiking?api_key=${process.env.OPEN_ROUTE_SERVICE_API_KEY}&start=${startCoord.lon},${startCoord.lat}&end=${endCoord.lon},${endCoord.lat}`,
   );
-  if (!result.ok) throw new Error("Failed to get path");
+  if (!result.ok) throw new Error("Could not retreive path");
 
-  return result.json();
+  const resultJson = await result.json();
+
+  if (!resultJson.features || resultJson.features.length === 0)
+    throw new Error("Path could not be found");
+
+  //This API can return mutliple features, showing muiltiple legs of the journey.
+  //If this happens then map them all into a single list, returns an array of lat,lon values.
+  return resultJson.features.flatMap((feature) =>
+    feature.geometry.coordinates.map(([lon, lat]) => [lat, lon]),
+  );
 };
 
 export const planRoute = async (startText, endText) => {
