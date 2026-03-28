@@ -20,11 +20,9 @@ const getPathBetweenCoordinates = async (startCoord, endCoord) => {
   const data = await res.json();
   return data;
 };
-const planRoute = async (startText, endText) => {
+export const planRoute = async (startText, endText) => {
   const startCoord = await geocodeLocation(startText);
   const endCoord = await geocodeLocation(endText);
   const path = await getPathBetweenCoordinates(startCoord, endCoord);
   return path;
 };
-
-export default { planRoute };

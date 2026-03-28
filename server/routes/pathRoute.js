@@ -1,6 +1,7 @@
-const express = require("express");
-const router = express.Router();
-const { planRoute } = require("../service/pathService").default;
+import express from 'express'
+import { planRoute } from '../service/pathService.js'
+
+const router = express.Router()
 
 router.get("/search", async (req, res) => {
   try {
@@ -12,4 +13,4 @@ router.get("/search", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

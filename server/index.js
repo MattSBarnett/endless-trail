@@ -1,8 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const pathRouter = require("./routes/pathRoute");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import pathRouter from "./routes/pathRoute.js";
 
-require("dotenv").config();
+dotenv.config();
 
 const app = express();
 app.use(express.json());
