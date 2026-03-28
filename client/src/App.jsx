@@ -1,7 +1,14 @@
-function App() {
+import { useState } from 'react'
+import PathSearch from './components/pathSearch'
+import MapViewer from './components/mapViewer'
 
+function App() {
+  const [path, setPath] = useState(null)
   return (
-    <h1>The Endless Trail</h1>
+    <div>
+      <PathSearch onResult={setPath}/>
+      {path && <MapViewer path={path} />}
+    </div>
   )
 }
 
