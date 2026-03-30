@@ -1,8 +1,8 @@
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
+
 
 export const getPath = async (start, end) => {
   const result = await fetch(
-    `${SERVER_URL}/api/path/search?start=${start}&end=${end}`,
+    `/api/path/search?start=${start}&end=${end}`,
   );
 
   if (!result.ok) {

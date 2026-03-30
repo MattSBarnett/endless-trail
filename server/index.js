@@ -5,6 +5,11 @@ import pathRouter from "./routes/pathRoute.js";
 import campsiteRouter from "./routes/campsiteRoute.js";
 import rateLimit from "express-rate-limit";
 import { createLogger } from "./config/logger.js";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const logger = createLogger("index");
 
 dotenv.config();
@@ -22,6 +27,13 @@ app.use(rateLimiter);
 app.use("/api/path", pathRouter);
 app.use("/api/campsite", campsiteRouter);
 
-app.listen(8080, () => {
-  logger.info("Running on http://localhost:8080");
+// Serve React build in production
+app.use(express.static(join(__dirname, "../client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(join(__dirname, "../client/dist", "index.html"));
+});
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  logger.info(`Running on port: ${PORT}`);
 });

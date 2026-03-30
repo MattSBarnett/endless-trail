@@ -1,8 +1,7 @@
-const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const getCampsite = async (stoppingPoint) => {
   const result = await fetch(
-    `${SERVER_URL}/api/campsite/search?lat=${stoppingPoint["lat"]}&lon=${stoppingPoint["lon"]}`,
+    `/api/campsite/search?lat=${stoppingPoint["lat"]}&lon=${stoppingPoint["lon"]}`,
   );
 
   if (!result.ok) {
