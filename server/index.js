@@ -27,9 +27,9 @@ app.use(rateLimiter);
 app.use("/api/path", pathRouter);
 app.use("/api/campsite", campsiteRouter);
 
-// Serve React build in production
 app.use(express.static(join(__dirname, "../client/dist")));
-app.get("*", (req, res) => {
+
+app.get("/{*splat}", (req, res) => {
   res.sendFile(join(__dirname, "../client/dist", "index.html"));
 });
 
