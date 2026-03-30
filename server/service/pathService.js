@@ -57,6 +57,12 @@ const calculateStoppingPoints = (pathGeoJson, dailyDistance) => {
     currentDistance < pathLength;
     currentDistance += dailyDistance
   ) {
+
+    // Don't find a campsite if you are less than half a day from finishing
+    if (pathLength - currentDistance < dailyDistance / 2) {
+      continue
+    }
+
     const point = turf.along(turfPath, currentDistance, {
       units: "kilometers",
     });
