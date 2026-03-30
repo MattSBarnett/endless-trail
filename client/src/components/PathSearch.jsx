@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getPath } from "../service/pathService";
 import { getCampsite } from "../service/campsiteService";
 
-function PathSearch({ onPathFound, onFoundCampsite }) {
+function PathSearch({ onPathFound, onFoundCampsite, clearCampsites }) {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [error, setError] = useState(null);
@@ -11,6 +11,7 @@ function PathSearch({ onPathFound, onFoundCampsite }) {
     try {
       const path = await getPath(start, end);
       onPathFound(path["coordinates"]);
+      clearCampsites();
       for (const stoppingPoint of path["stoppingPoints"]) {
         const campsite = await getCampsite(stoppingPoint);
         if (campsite) onFoundCampsite(campsite);

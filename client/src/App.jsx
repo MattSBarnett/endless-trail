@@ -12,7 +12,11 @@ function App() {
   return (
     <div className="min-h-screen bg-green-50 p-6">
       <div>
-        <PathSearch onPathFound={setPath} onFoundCampsite={addNewCampsite} />
+        <PathSearch
+          onPathFound={setPath}
+          onFoundCampsite={addNewCampsite}
+          clearCampsites={() => setCampsites([])}
+        />
         {path && <MapViewer path={path} campsites={campsites} />}
       </div>
     </div>
