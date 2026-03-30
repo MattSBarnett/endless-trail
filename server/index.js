@@ -3,6 +3,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import pathRouter from "./routes/pathRoute.js";
 import rateLimit from "express-rate-limit";
+import { createLogger } from "./config/logger.js";
+const logger = createLogger("index");
 
 dotenv.config();
 
@@ -19,5 +21,5 @@ app.use(rateLimiter);
 app.use("/api/path", pathRouter);
 
 app.listen(8080, () => {
-  console.log("The endless trail, running on: http://localhost:8080");
+  logger.info("Running on http://localhost:8080");
 });
