@@ -27,6 +27,10 @@ function PathSearch({ onPathFound, onFoundCampsite, clearCampsites }) {
         The Endless Trail
       </h1>
 
+      <p className="text-green-700 text-center text-base">
+        Plan your next trip, enter where you want to walk and discover a path
+        for you.
+      </p>
       <div className="flex gap-4">
         <div className="flex flex-col gap-1 flex-1">
           <label className="text-green-900 font-semibold text-sm">Start</label>
@@ -35,6 +39,7 @@ function PathSearch({ onPathFound, onFoundCampsite, clearCampsites }) {
             value={start}
             onChange={(e) => setStart(e.target.value)}
             className="border border-green-200 rounded-lg px-4 py-2 bg-green-50 text-green-900"
+            placeholder="e.g. Plymouth, St Ives"
           />
         </div>
         <div className="flex flex-col gap-1 flex-1">
@@ -44,6 +49,7 @@ function PathSearch({ onPathFound, onFoundCampsite, clearCampsites }) {
             value={end}
             onChange={(e) => setEnd(e.target.value)}
             className="border border-green-200 rounded-lg px-4 py-2 bg-green-50 text-green-900"
+            placeholder="e.g. Bude, Exmouth"
           />
         </div>
       </div>
@@ -52,7 +58,7 @@ function PathSearch({ onPathFound, onFoundCampsite, clearCampsites }) {
         <button
           onClick={findRoute}
           disabled={!start.trim() || !end.trim()}
-          className="bg-green-600 disabled:bg-green-300 text-white px-8 py-2 rounded-lg"
+          className="bg-green-600 disabled:bg-green-300 cursor-pointer disabled:cursor-not-allowed text-white px-8 py-2 rounded-lg"
         >
           Find Route
         </button>
