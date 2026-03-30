@@ -11,7 +11,7 @@ function App() {
     setCampsites((currnet) => currnet.concat(campsite));
   };
   return (
-    <div className="min-h-screen bg-green-50 p-6">
+    <div className="min-h-screen bg-green-50 p-6 md:p-6">
       <div>
         <PathSearch
           onPathFound={setPath}

@@ -31,7 +31,7 @@ function PathSearch({ onPathFound, onFoundCampsite, clearCampsites }) {
         Plan your next trip, enter where you want to walk and discover a path
         for you.
       </p>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <div className="flex flex-col gap-1 flex-1">
           <label className="text-green-900 font-semibold text-sm">Start</label>
           <input
