@@ -27,17 +27,13 @@ function FitBounds({ path }) {
 }
 
 function MapViewer({ path, campsites = [] }) {
-  /*
-    MapContainer variables:
-    minZoom 6 - allows you to zoom out until you see all of the UK
-    maxBoundsViscosity 1.0 - stops users going outsdie the max bounds*/
   return (
     <div className="bg-white rounded-xl p-4 mt-4">
       <MapContainer
         center={path[0]}
-        maxBoundsViscosity={1.0}
+        maxBoundsViscosity={1.0} //Cannot go outside set bounds
         zoom={13}
-        minZoom={6}
+        minZoom={6} //Stops zoom going beyond the UK
         maxBounds={MAP_BOUNDS}
         scrollWheelZoom={false}
         style={{ height: "400px", width: "100%" }}
