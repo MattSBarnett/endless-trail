@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PathSearch from "./components/PathSearch";
 import MapViewer from "./components/MapViewer";
+import DayPlanner from "./components/DayPlanner";
 
 function App() {
   const [path, setPath] = useState(null);
@@ -18,6 +19,7 @@ function App() {
           clearCampsites={() => setCampsites([])}
         />
         {path && <MapViewer path={path} campsites={campsites} />}
+        {campsites.length > 0 && <DayPlanner campsites={campsites} />}
       </div>
     </div>
   );
