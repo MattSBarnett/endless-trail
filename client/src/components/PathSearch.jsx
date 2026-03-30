@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { getPath } from "../service/pathService";
+import { getCampsite } from "../service/campsiteService";
 
-function PathSearch({ onResult }) {
+function PathSearch({ onPathFound, onFoundCampsite }) {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [error, setError] = useState(null);
@@ -9,11 +10,16 @@ function PathSearch({ onResult }) {
   const findRoute = async () => {
     try {
       const path = await getPath(start, end);
-      onResult(path["coordinates"]);
+      onPathFound(path["coordinates"]);
+      for (const stoppingPoint of path["stoppingPoints"]) {
+        const campsite = await getCampsite(stoppingPoint);
+        if (campsite) onFoundCampsite(campsite);
+      }
     } catch (errorRespnse) {
       setError(errorRespnse.message);
     }
   };
+
   return (
     <div className="bg-white rounded-xl p-6 flex flex-col gap-4">
       <h1 className="text-green-900 font-bold text-3xl text-center">
