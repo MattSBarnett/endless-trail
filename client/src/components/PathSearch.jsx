@@ -9,7 +9,7 @@ function PathSearch({ onResult }) {
   const findRoute = async () => {
     try {
       const path = await getPath(start, end);
-      onResult(path);
+      onResult(path["coordinates"]);
     } catch (errorRespnse) {
       setError(errorRespnse.message);
     }
