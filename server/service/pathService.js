@@ -29,7 +29,7 @@ const getPathBetweenCoordinates = async (startCoord, endCoord) => {
 
   if (!result.ok) {
     logger.error(`Returned: ${result.status} for url: ${url}`);
-    throw new Error("Could not retreive path");
+    throw new Error("Could not retrieve path");
   }
 
   const resultJson = await result.json();
@@ -57,10 +57,9 @@ const calculateStoppingPoints = (pathGeoJson, dailyDistance) => {
     currentDistance < pathLength;
     currentDistance += dailyDistance
   ) {
-
     // Don't find a campsite if you are less than half a day from finishing
     if (pathLength - currentDistance < dailyDistance / 2) {
-      continue
+      continue;
     }
 
     const point = turf.along(turfPath, currentDistance, {
@@ -90,9 +89,10 @@ export const planRoute = async (startText, endText, dailyDistance = 20) => {
   const startCoord = await geocodeLocation(startText);
   const endCoord = await geocodeLocation(endText);
   const pathGeoJson = await getPathBetweenCoordinates(startCoord, endCoord);
-  const stoppingPoints = calculateStoppingPoints(pathGeoJson, dailyDistance);
+  const  stoppingPoints = calculateStoppingPoints(pathGeoJson, dailyDistance);
 
-  //This API can return mutliple features, showing muiltiple legs of the journey, if this happens then map them all into a single list.
+
+  //This API can return multiple features, showing multiple legs of the journey, if this happens then map them all into a single list.
   //This also switches them from lon, lat used in GeoJSON to lat, lon used by leaflet which we use for front end rendering.
   const pathCoordinates = pathGeoJson.features.flatMap((feature) =>
     feature.geometry.coordinates.map(([lon, lat]) => [lat, lon]),
