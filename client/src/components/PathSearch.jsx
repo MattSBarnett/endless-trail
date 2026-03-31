@@ -9,6 +9,7 @@ function PathSearch({ onPathFound, onFoundCampsite, clearCampsites }) {
 
   const findRoute = async () => {
     try {
+      setError(null);
       const path = await getPath(start, end);
       onPathFound(path["coordinates"]);
       clearCampsites();
